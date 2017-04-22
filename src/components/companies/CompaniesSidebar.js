@@ -1,6 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+
+import {
+  ADD_COMPANY_SUBJECT,
+  ADD_COMPANY_BODY,
+  APPLY_FOR_JOB_SUBJECT,
+  APPLY_FOR_JOB_BODY,
+  HIRE_DEVELOPERS_SUBJECT,
+  HIRE_DEVELOPERS_BODY,
+  NEED_HELP_SUBJECT,
+  NEED_HELP_BODY
+} from '../../constants/templates';
 
 const Sidebar = styled.div`
   position: sticky;
@@ -14,7 +24,7 @@ const SidebarBlock = styled.div`
   
   & > a {
     display: block;
-    font-weight: bold;
+    font-weight: 400;
     margin-top: 0.5rem;
   }
 `;
@@ -40,29 +50,29 @@ const CompaniesSidebar = () => (
   <Sidebar>
     <SidebarBlock>
       Don’t see your company in the list?
-      <Link to="/companies/new">Add a company</Link>
+      <a href={`mailto:ilya@500tech.com?cc=kirjs@google.com&subject=${ADD_COMPANY_SUBJECT}&body=${ADD_COMPANY_BODY}`}>Add a company</a>
     </SidebarBlock>
 
     <FHTBanner>
       <a href="http://500tech.com" target="_blank">
-        <img src="/500-logo.png" alt="500Tech" width={240}/>
+        <img src="/500-logo.png" alt="500Tech" width="100%"/>
       </a>
 
       <BannerText>
         Need on-site development, consulting, or training?
       </BannerText>
 
-      <a href="mailto:nyc@500tech.com">Get in touch</a>
+      <a href={`mailto:nyc@500tech.com?subject=${NEED_HELP_SUBJECT}&body=${NEED_HELP_BODY}`}>Get in touch</a>
     </FHTBanner>
 
     <SidebarBlock>
       Looking for job?
-      <a href="">Send your resume to everyone</a>
+      <a href={`mailto:ilya@500tech.com?cc=kirjs@google.com&subject=${APPLY_FOR_JOB_SUBJECT}&body=${APPLY_FOR_JOB_BODY}`}>Send your resume</a>
     </SidebarBlock>
 
     <SidebarBlock>
-      Have open positions?
-      <a href="">Advertise them (for free)</a>
+      Hiring developers?
+      <a href={`mailto:ilya@500tech.com?cc=kirjs@google.com&subject=${HIRE_DEVELOPERS_SUBJECT}&body=${HIRE_DEVELOPERS_BODY}`}>Advertise open positions for free</a>
     </SidebarBlock>
   </Sidebar>
 );

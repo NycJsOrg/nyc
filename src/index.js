@@ -1,29 +1,39 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import './index.css';
 import styled from 'styled-components';
 import { createClient } from 'contentful';
-import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
+import { BrowserRouter as Router, Route, NavLink, Redirect } from 'react-router-dom';
 
 import Companies from './components/companies/Companies';
-import AddCompany from './components/companies/AddCompany';
 import Communities from './components/communities/Communities';
 import Events from './components/events/Events';
 import People from './components/people/People';
 
+const App = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+`;
+
 const Header = styled.div`
   padding: 4rem 4rem 1rem 4rem;
+`;
+
+const MainNavigation = styled.ul`
+  padding: 0;
   
-  & > ul {
-    padding: 0;
-  }
-  
-  & > ul > li {
+  & > li {
     list-style: none;
     display: inline-block;
     font-size: 1.2rem;
     margin-right: 0.8rem;
+  }
+`;
+
+const SecondaryNavigation = styled(MainNavigation)`
+  & > li {
+    font-size: 1rem;
   }
 `;
 
@@ -37,19 +47,14 @@ const Footer = styled.div`
   padding: 1rem 4rem 4rem 4rem;
 `;
 
-const AppContainer = styled.div`
-  height: 100%;
-`;
-
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-`;
-
 const Stretch = styled.div`
   flex: 1;
   margin-bottom: 3rem;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 0 4rem;
+  margin-top: 1rem;
 `;
 
 window.client = createClient({
@@ -65,38 +70,46 @@ const activeLinkStyle = {
 };
 
 ReactDOM.render(
-  <AppContainer>
-    <Router>
-      <Content>
-        <Header>
-          <MainTitle>
-            JavaScript in New York City
-          </MainTitle>
+  <Router>
+    <App>
+      <Header>
+        <MainTitle>
+          JavaScript in New York City
+        </MainTitle>
 
-          <ul>
-            <li><NavLink to="/communities" activeStyle={activeLinkStyle}>Communities</NavLink></li>
-            <li><NavLink to="/events" activeStyle={activeLinkStyle}>Events</NavLink></li>
-            <li><NavLink to="/companies/React" activeStyle={activeLinkStyle}>Companies</NavLink></li>
-            <li><NavLink to="/people" activeStyle={activeLinkStyle}>People</NavLink></li>
-          </ul>
-        </Header>
+        <MainNavigation>
+          <li><NavLink to="/communities" activeStyle={activeLinkStyle}>Communities</NavLink></li>
+          <li><NavLink to="/events" activeStyle={activeLinkStyle}>Events</NavLink></li>
+          <li><NavLink to="/companies" activeStyle={activeLinkStyle}>Companies</NavLink></li>
+          <li><NavLink to="/people" activeStyle={activeLinkStyle}>People</NavLink></li>
+        </MainNavigation>
 
-        <Stretch>
-          <Route exact path="/communities" component={Communities}/>
-          <Route exact path="/events" component={Events}/>
-          <Route exact path="/people" component={People}/>
+        <Route path="/companies" render={() => (
+          <SecondaryNavigation>
+            <li><NavLink to="/companies/React" activeStyle={activeLinkStyle}>React</NavLink></li>
+            <li><NavLink to="/companies/React Native" activeStyle={activeLinkStyle}>React Native</NavLink></li>
+            <li><NavLink to="/companies/Angular" activeStyle={activeLinkStyle}>Angular</NavLink></li>
+          </SecondaryNavigation>
+        )}/>
+      </Header>
 
-          <Route exact path="/companies/new" component={AddCompany}/>
-          <Route exact path="/companies/:framework" component={Companies}/>
-        </Stretch>
+      <Stretch>
+        <Route exact path="/communities" component={Communities}/>
+        <Route exact path="/events" component={Events}/>
+        <Route exact path="/people" component={People}/>
+        <Route path="/companies/:framework" component={Companies}/>
+      </Stretch>
 
-        <Footer>
-          Created by <a href="https://twitter.com/ilyagelman" target="_blank">@ilyagelman</a>
-          {' and '}
-          <a href="https://twitter.com/kirjs" target="_blank">@kirjs</a>
-        </Footer>
-      </Content>
-    </Router>
-  </AppContainer>,
+      <Footer>
+        Created by <a href="https://twitter.com/ilyagelman" target="_blank">@ilyagelman</a>
+        {' and '}
+        <a href="https://twitter.com/kirjs" target="_blank">@kirjs</a>
+      </Footer>
+
+      <Route path="/companies" render={() => (
+        <Redirect to="/companies/React"/>
+      )}/>
+    </App>
+  </Router>,
   document.getElementById('root')
 );
