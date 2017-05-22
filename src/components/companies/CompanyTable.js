@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import TrackableLink from '../TrackableLink';
+
 const HiringLabel = styled.div`
   &:after {
     content: 'Hiring';
@@ -48,8 +50,8 @@ const CompanyTable = ({ companies }) => {
     return (
       <TableRow key={ company.sys.id }>
         <Cell width="10rem">
-          <img src={website + '/favicon.ico'} alt="Favicon" width="16" height="16" style={{ position: 'absolute', left: '-26px' }}/>
-          <a href={website}>{ name }</a>
+          <img src={'https://www.google.com/s2/favicons?domain=' + website} alt="Favicon" width="16" height="16" style={{ position: 'absolute', left: '-26px' }}/>
+          <TrackableLink href={website}>{ name }</TrackableLink>
         </Cell>
 
         <Cell>{ description }</Cell>

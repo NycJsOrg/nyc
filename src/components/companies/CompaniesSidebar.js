@@ -1,16 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import {
-  ADD_COMPANY_SUBJECT,
-  ADD_COMPANY_BODY,
-  APPLY_FOR_JOB_SUBJECT,
-  APPLY_FOR_JOB_BODY,
-  HIRE_DEVELOPERS_SUBJECT,
-  HIRE_DEVELOPERS_BODY,
-  NEED_HELP_SUBJECT,
-  NEED_HELP_BODY
-} from '../../constants/templates';
+import TrackableLink from '../TrackableLink';
+
+import { NEED_HELP_SUBJECT, NEED_HELP_BODY } from '../../constants/templates';
 
 const Sidebar = styled.div`
   position: sticky;
@@ -50,29 +43,35 @@ const CompaniesSidebar = () => (
   <Sidebar>
     <SidebarBlock>
       Don’t see your company in the list?
-      <a href={`mailto:ilya@500tech.com?cc=kirjs@google.com&subject=${ADD_COMPANY_SUBJECT}&body=${ADD_COMPANY_BODY}`}>Add a company</a>
+      <TrackableLink href="https://docs.google.com/forms/d/e/1FAIpQLScixexO3Yves4FYrHwfFcu4D6iCC8eghLofBZGiu0lTxrYydA/viewform" target="_blank">
+        Add a company
+      </TrackableLink>
     </SidebarBlock>
 
     <FHTBanner>
-      <a href="http://500tech.com" target="_blank">
+      <TrackableLink href="http://500tech.com" target="_blank">
         <img src="/500-logo.png" alt="500Tech" width="100%"/>
-      </a>
+      </TrackableLink>
 
       <BannerText>
         Need on-site development, consulting, or training?
       </BannerText>
 
-      <a href={`mailto:nyc@500tech.com?subject=${NEED_HELP_SUBJECT}&body=${NEED_HELP_BODY}`}>Get in touch</a>
+      <TrackableLink href={`mailto:nyc@500tech.com?subject=${NEED_HELP_SUBJECT}&body=${NEED_HELP_BODY}`}>Get in touch</TrackableLink>
     </FHTBanner>
 
     <SidebarBlock>
       Looking for job?
-      <a href={`mailto:ilya@500tech.com?cc=kirjs@google.com&subject=${APPLY_FOR_JOB_SUBJECT}&body=${APPLY_FOR_JOB_BODY}`}>Send your resume</a>
+      <TrackableLink href="https://docs.google.com/forms/d/e/1FAIpQLSfyOHc8NZiBRG6-ug3FpdjXC8rsxrPOSPwCCEhdYsDWTcKiQw/viewform" target="_blank">
+        Send your resume
+      </TrackableLink>
     </SidebarBlock>
 
     <SidebarBlock>
       Hiring developers?
-      <a href={`mailto:ilya@500tech.com?cc=kirjs@google.com&subject=${HIRE_DEVELOPERS_SUBJECT}&body=${HIRE_DEVELOPERS_BODY}`}>Advertise open positions for free</a>
+      <TrackableLink href="https://docs.google.com/forms/d/e/1FAIpQLSedcW89tu4BHvv8oOMta1_-zb0ep_pV_1PCQ8BoCigjEngLxw/viewform" target="_blank">
+        Advertise open positions for free
+      </TrackableLink>
     </SidebarBlock>
   </Sidebar>
 );

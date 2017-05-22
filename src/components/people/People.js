@@ -25,6 +25,10 @@ class People extends React.Component {
         people: shuffle(response.items),
         loading: false
       }));
+
+
+    window.ga('set', 'page', '/people');
+    window.ga('send', 'pageview');
   }
 
   render() {

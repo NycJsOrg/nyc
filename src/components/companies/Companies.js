@@ -36,6 +36,9 @@ class Companies extends React.Component {
         companies: sortBy(response.items, 'fields.name'),
         loading: false
       }));
+
+    window.ga('set', 'page', '/companies/' + props.match.params.framework);
+    window.ga('send', 'pageview');
   };
 
   render() {

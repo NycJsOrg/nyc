@@ -19,6 +19,9 @@ class Communities extends React.Component {
         communities: shuffle(response.items),
         loading: false
       }));
+
+    window.ga('set', 'page', '/communities');
+    window.ga('send', 'pageview');
   }
 
   render() {

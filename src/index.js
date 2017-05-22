@@ -5,10 +5,12 @@ import styled from 'styled-components';
 import { createClient } from 'contentful';
 import { BrowserRouter as Router, Route, NavLink, Redirect } from 'react-router-dom';
 
+import TrackableLink from './components/TrackableLink';
 import Companies from './components/companies/Companies';
 import Communities from './components/communities/Communities';
 import Events from './components/events/Events';
 import People from './components/people/People';
+import Chat from './components/chat/Chat';
 
 const App = styled.div`
   display: flex;
@@ -82,6 +84,7 @@ ReactDOM.render(
           <li><NavLink to="/events" activeStyle={activeLinkStyle}>Events</NavLink></li>
           <li><NavLink to="/companies" activeStyle={activeLinkStyle}>Companies</NavLink></li>
           <li><NavLink to="/people" activeStyle={activeLinkStyle}>People</NavLink></li>
+          <li><NavLink to="/chat" activeStyle={activeLinkStyle}>Chat</NavLink></li>
         </MainNavigation>
 
         <Route path="/companies" render={() => (
@@ -97,13 +100,14 @@ ReactDOM.render(
         <Route exact path="/communities" component={Communities}/>
         <Route exact path="/events" component={Events}/>
         <Route exact path="/people" component={People}/>
+        <Route exact path="/chat" component={Chat}/>
         <Route path="/companies/:framework" component={Companies}/>
       </Stretch>
 
       <Footer>
-        Created by <a href="https://twitter.com/ilyagelman" target="_blank">@ilyagelman</a>
+        Created by <TrackableLink href="https://twitter.com/ilyagelman" target="_blank">@ilyagelman</TrackableLink>
         {' and '}
-        <a href="https://twitter.com/kirjs" target="_blank">@kirjs</a>
+        <TrackableLink href="https://twitter.com/kirjs" target="_blank">@kirjs</TrackableLink>
       </Footer>
 
       <Route path="/companies" render={() => (

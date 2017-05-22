@@ -7,6 +7,8 @@ import isToday from 'date-fns/is_today';
 import isFirstDayOfMonth from 'date-fns/is_first_day_of_month'
 import getMonth from 'date-fns/get_month';
 
+import TrackableLink from '../TrackableLink';
+
 const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -63,9 +65,9 @@ const Calendar = ({ dateRange, events }) => {
         const { badge, communityName } = event.fields.community.fields;
 
         return (
-          <a href={event.fields.url} target="_blank" key={event.fields.url}>
+          <TrackableLink href={event.fields.url} target="_blank" key={event.fields.url}>
             <img src={badge.fields.file.url} alt={communityName} width={40} height={40}/>
-          </a>
+          </TrackableLink>
         );
       });
 

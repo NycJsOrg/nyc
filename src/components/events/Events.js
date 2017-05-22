@@ -38,6 +38,9 @@ class Events extends React.Component {
         events: response.items,
         loading: false
       }));
+
+    window.ga('set', 'page', '/events');
+    window.ga('send', 'pageview');
   }
 
   render() {

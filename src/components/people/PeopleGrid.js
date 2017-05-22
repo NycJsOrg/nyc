@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ADD_PROFILE_SUBJECT, ADD_PROFILE_BODY } from '../../constants/templates';
+
+import TrackableLink from '../TrackableLink';
 
 const Grid = styled.div`
   display: flex;
@@ -47,7 +48,7 @@ const PeopleGrid = ({ people }) => {
           { linkedIn ? (
               <div>
                 <SocialIcon src="/linkedin.svg" alt="LinkedIn logo"/>
-                <a href={linkedIn}>{ fullName }</a>
+                <TrackableLink href={linkedIn}>{ fullName }</TrackableLink>
               </div>
             ) : fullName }
         </PersonName>
@@ -56,7 +57,7 @@ const PeopleGrid = ({ people }) => {
           twitter &&
           <SocialLink>
             <SocialIcon src="/twitter.svg" alt="Twitter logo"/>
-            <a href={`https://twitter.com/${twitter}`}>@{ twitter }</a>
+            <TrackableLink href={`https://twitter.com/${twitter}`}>@{ twitter }</TrackableLink>
           </SocialLink>
         }
 
@@ -64,7 +65,7 @@ const PeopleGrid = ({ people }) => {
           github &&
           <SocialLink>
             <SocialIcon src="/github.svg" alt="GitHub logo"/>
-            <a href={`https://github.com/${github}`}>{ github }</a>
+            <TrackableLink href={`https://github.com/${github}`}>{ github }</TrackableLink>
           </SocialLink>
         }
       </Person>
@@ -74,13 +75,13 @@ const PeopleGrid = ({ people }) => {
   return (
     <Grid>
       <Person>
-        <a href={`mailto:ilya@500tech.com?cc=kirjs@google.com&subject=${ADD_PROFILE_SUBJECT}&body=${ADD_PROFILE_BODY}`}>
+        <TrackableLink href="https://docs.google.com/forms/d/1q4lFBWu8lnRzPge1KUvBbrdtwEDDVrxsaGpumKPRHFQ/viewform" target="_blank">
           <img src="/passport.png" alt="Add profile" width="200rem" height="200rem" style={{ border: '1px solid #f1f1f1' }}/>
 
           <PersonName>
             Add your profile
           </PersonName>
-        </a>
+        </TrackableLink>
       </Person>
 
       { people.map(renderPerson) }

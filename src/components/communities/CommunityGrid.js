@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import TrackableLink from '../TrackableLink';
+
 const Grid = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -23,9 +25,15 @@ const Description = styled.div`
   margin-bottom: 1rem;
 `;
 
+const SlackLogo = styled.img`
+  width: 1rem;
+  margin-right: 0.2rem;
+  vertical-align: middle;
+`;
+
 const Links = styled.div`
   & > a {
-    margin-right: 0.5rem;
+    margin-right: 0.7rem;
   }
 `;
 
@@ -40,7 +48,7 @@ const ComunityGrid = ({ communities }) => {
     return (
       <Community key={ community.sys.id }>
         <Name>
-          <a href={website} target="_blank">{ communityName }</a>
+          <TrackableLink href={website} target="_blank">{ communityName }</TrackableLink>
         </Name>
 
         <Description>
@@ -48,8 +56,14 @@ const ComunityGrid = ({ communities }) => {
         </Description>
 
         <Links>
-          <a href={website} target="_blank">Join</a>
-          { slack && <a href={slack} target="_blank">Slack</a> }
+          <TrackableLink href={website} target="_blank">Join</TrackableLink>
+          {
+            slack &&
+            <TrackableLink href={slack} target="_blank">
+              <SlackLogo src="/slack.svg" alt="Slack Logo"/>
+              Slack
+            </TrackableLink>
+          }
         </Links>
       </Community>
     );
