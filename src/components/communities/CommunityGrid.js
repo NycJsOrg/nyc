@@ -46,7 +46,7 @@ const ComunityGrid = ({ communities }) => {
     const { communityName, description, website, slack } = community.fields;
 
     return (
-      <Community key={ community.sys.id }>
+      <Community key={ community.id }>
         <Name>
           <TrackableLink href={website} target="_blank">{ communityName }</TrackableLink>
         </Name>

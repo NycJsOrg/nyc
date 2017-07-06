@@ -5,7 +5,9 @@ import sortBy from 'lodash/sortBy';
 const queryForContent = (res, query) => {
   return queryContentful(query).then(
     ({ items }) => items
-  ).then(
+  )
+  .then(items => items.map(({ sys, fields }) => ({ id: sys.id, fields })))
+  .then(
     (data) => res.json(data),
     (data) => res.status(400).json([])
   ).catch((data) => res.status(401).json(data));
