@@ -25,7 +25,7 @@ export const apiServer = () => {
   router.get('/companies', (req, res) => {
     return queryForContent(res, {
       'content_type': 'company',
-      'fields.frameworks[in]': (res.params || {}).framework,
+      'fields.frameworks[in]': (req.query || {}).framework,
     }).then(
       (items) => sortBy(items, 'fields.name')
     );
