@@ -7,11 +7,7 @@ import styled from 'styled-components';
 import { BrowserRouter as Router, Route, NavLink, Redirect } from 'react-router-dom';
 
 import TrackableLink from './components/TrackableLink';
-import Companies from './components/companies/Companies';
-import Communities from './components/communities/Communities';
-import Events from './components/events/Events';
-import People from './components/people/People';
-import Chat from './components/chat/Chat';
+import { asyncComponent } from './components/AsyncComponent';
 
 const App = styled.div`
   display: flex;
@@ -93,11 +89,11 @@ ReactDOM.render(
       </Header>
 
       <Stretch>
-        <Route exact path="/communities" component={Communities}/>
-        <Route exact path="/events" component={Events}/>
-        <Route exact path="/people" component={People}/>
-        <Route exact path="/chat" component={Chat}/>
-        <Route path="/companies/:framework" component={Companies}/>
+        <Route exact path="/communities" component={ asyncComponent(() => import('./components/communities/Communities')) }/>
+        <Route exact path="/events" component={ asyncComponent(() => import('./components/events/Events')) }/>
+        <Route exact path="/people" component={ asyncComponent(() => import('./components/people/People')) }/>
+        <Route exact path="/chat" component={ asyncComponent(() => import('./components/chat/Chat')) }/>
+        <Route path="/companies/:framework" component={ asyncComponent(() => import('./components/companies/Companies')) }/>
       </Stretch>
 
       <Footer>
