@@ -1,7 +1,7 @@
 import React from 'react';
 
 const trackClick = (props) => (event) => {
-  window.ga('send', 'event', 'openLink', props.href);
+  global.ga('send', 'event', 'openLink', props.href);
 
   if (props.onClick) {
     props.onClick(event);

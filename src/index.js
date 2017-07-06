@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import styled from 'styled-components';
-import { createClient } from 'contentful';
 import { BrowserRouter as Router, Route, NavLink, Redirect } from 'react-router-dom';
 
 import TrackableLink from './components/TrackableLink';
@@ -59,11 +58,6 @@ const Stretch = styled.div`
   margin-top: 1rem;
 `;
 
-window.client = createClient({
-  space: 'j1vuikz5psjc',
-  accessToken: '8c1c2d8a076eaef423845f207d8da00b5e0544bf1777e0f3b7335a768226238b'
-});
-
 const activeLinkStyle = {
   color: 'black',
   textDecoration: 'none',
@@ -106,8 +100,10 @@ ReactDOM.render(
 
       <Footer>
         Created by <TrackableLink href="https://twitter.com/ilyagelman" target="_blank">@ilyagelman</TrackableLink>
-        {' and '}
+        {', '}
         <TrackableLink href="https://twitter.com/kirjs" target="_blank">@kirjs</TrackableLink>
+        {' and '}
+        <TrackableLink href="https://github.com/maniator" target="_blank">@maniator</TrackableLink>
       </Footer>
 
       <Route path="/companies" render={() => (
