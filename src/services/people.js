@@ -1,7 +1,4 @@
-import {queryContentful} from './contentful';
-
 export const getPeople = () => {
-  return queryContentful({
-    'content_type': 'person'
-  }).then(({ items }) => items);
+  return fetch('/api/people')
+    .then(response => response.json());
 };

@@ -1,7 +1,3 @@
-import {queryContentful} from './contentful';
-
 export const getCommunities = () => {
-  return queryContentful({
-    'content_type': 'community'
-  }).then(({ items }) => items);
+  return fetch('/api/communities').then(response => response.json());
 };

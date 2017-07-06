@@ -1,7 +1,4 @@
-import {queryContentful} from './contentful';
-
 export const getEvents = () => {
-  return queryContentful({
-    'content_type': 'event'
-  }).then(({ items }) => items);
+  return fetch('/api/events')
+    .then(response => response.json());
 };
