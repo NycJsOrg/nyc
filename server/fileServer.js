@@ -13,6 +13,12 @@ export const fileServer = (port = 3030) => {
   const app = express();
   const staticPath = root('build');
   
+  app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+  
   app.use('/api', apiServer());
   app.use(express.static(staticPath));
   app.use(fallback('index.html', { root: staticPath }));

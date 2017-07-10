@@ -1,4 +1,4 @@
 export const getEvents = () => {
-  return fetch('/api/events')
+  return fetch(`${global.apiServiceURL}/api/events`)
     .then(response => response.json());
 };

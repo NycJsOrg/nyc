@@ -1,3 +1,3 @@
 export const getCommunities = () => {
-  return fetch('/api/communities').then(response => response.json());
+  return fetch(`${global.apiServiceURL}/api/communities`).then(response => response.json());
 };

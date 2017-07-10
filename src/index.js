@@ -7,6 +7,8 @@ import { BrowserRouter as Router, Route, NavLink, Redirect } from 'react-router-
 import TrackableLink from './components/TrackableLink';
 import { asyncComponent } from './components/AsyncComponent';
 
+global.apiServiceURL = process.env.REACT_APP_API_URL || '';
+
 const App = styled.div`
   display: flex;
   flex-direction: column;
