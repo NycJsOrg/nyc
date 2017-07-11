@@ -7,6 +7,7 @@ import endOfWeek from 'date-fns/end_of_week';
 import eachDay from 'date-fns/each_day';
 
 import Calendar from './Calendar';
+import {getEvents} from '../../services/events';
 
 const Container = styled.div`
   flex-direction: column;
@@ -29,18 +30,14 @@ class Events extends React.Component {
   }
 
   componentDidMount() {
-    const query = {
-      'content_type': 'event'
-    };
-
-    window.client.getEntries(query)
-      .then(response => this.setState({
-        events: response.items,
+    getEvents()
+      .then(items => this.setState({
+        events: items,
         loading: false
       }));
 
-    window.ga('set', 'page', '/events');
-    window.ga('send', 'pageview');
+    global.ga('set', 'page', '/events');
+    global.ga('send', 'pageview');
   }
 
   render() {

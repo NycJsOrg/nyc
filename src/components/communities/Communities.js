@@ -1,6 +1,7 @@
 import React from 'react';
 import shuffle from 'lodash/shuffle';
 import CommunityGrid from './CommunityGrid';
+import {getCommunities} from '../../services/communities';
 
 class Communities extends React.Component {
 
@@ -10,18 +11,14 @@ class Communities extends React.Component {
   };
 
   componentDidMount() {
-    const query = {
-      'content_type': 'community'
-    };
-
-    window.client.getEntries(query)
-      .then(response => this.setState({
-        communities: shuffle(response.items),
+    getCommunities()
+      .then(items => this.setState({
+        communities: shuffle(items),
         loading: false
       }));
 
-    window.ga('set', 'page', '/communities');
-    window.ga('send', 'pageview');
+    global.ga('set', 'page', '/communities');
+    global.ga('send', 'pageview');
   }
 
   render() {

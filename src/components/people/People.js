@@ -3,6 +3,7 @@ import shuffle from 'lodash/shuffle';
 import styled from 'styled-components';
 
 import PeopleGrid from './PeopleGrid';
+import {getPeople} from '../../services/people';
 
 const Container = styled.div`
   flex-direction: column;
@@ -16,19 +17,15 @@ class People extends React.Component {
   };
 
   componentDidMount() {
-    const query = {
-      'content_type': 'person'
-    };
-
-    window.client.getEntries(query)
-      .then(response => this.setState({
-        people: shuffle(response.items),
+    getPeople()
+      .then(items => this.setState({
+        people: shuffle(items),
         loading: false
       }));
 
 
-    window.ga('set', 'page', '/people');
-    window.ga('send', 'pageview');
+    global.ga('set', 'page', '/people');
+    global.ga('send', 'pageview');
   }
 
   render() {

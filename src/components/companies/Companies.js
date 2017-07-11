@@ -1,9 +1,9 @@
 import React  from 'react';
-import sortBy from 'lodash/sortBy';
 import styled from 'styled-components';
 
 import CompanyTable from './CompanyTable';
 import CompaniesSidebar from './CompaniesSidebar';
+import {getCompaniesByFramework} from '../../services/companies';
 
 const Container = styled.div`
   display: flex;
@@ -26,19 +26,14 @@ class Companies extends React.Component {
   }
 
   fetchCompanies = (props) => {
-    const query = {
-      'content_type': 'company',
-      'fields.frameworks[in]': props.match.params.framework
-    };
-
-    window.client.getEntries(query)
-      .then(response => this.setState({
-        companies: sortBy(response.items, 'fields.name'),
+    getCompaniesByFramework(props.match.params.framework)
+      .then(items => this.setState({
+        companies: items,
         loading: false
       }));
 
-    window.ga('set', 'page', '/companies/' + props.match.params.framework);
-    window.ga('send', 'pageview');
+    global.ga('set', 'page', '/companies/' + props.match.params.framework);
+    global.ga('send', 'pageview');
   };
 
   render() {

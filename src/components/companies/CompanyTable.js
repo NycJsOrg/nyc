@@ -48,7 +48,7 @@ const CompanyTable = ({ companies }) => {
     const { name, description, size, website, isHiring } = company.fields;
 
     return (
-      <TableRow key={ company.sys.id }>
+      <TableRow key={ company.id }>
         <Cell width="10rem">
           <img src={'https://www.google.com/s2/favicons?domain=' + website} alt="Favicon" width="16" height="16" style={{ position: 'absolute', left: '-26px' }}/>
           <TrackableLink href={website}>{ name }</TrackableLink>

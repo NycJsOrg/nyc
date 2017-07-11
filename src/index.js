@@ -2,15 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import styled from 'styled-components';
-import { createClient } from 'contentful';
 import { BrowserRouter as Router, Route, NavLink, Redirect } from 'react-router-dom';
 
 import TrackableLink from './components/TrackableLink';
-import Companies from './components/companies/Companies';
-import Communities from './components/communities/Communities';
-import Events from './components/events/Events';
-import People from './components/people/People';
-import Chat from './components/chat/Chat';
+import { asyncComponent } from './components/AsyncComponent';
+
+global.apiServiceURL = process.env.REACT_APP_API_URL || '';
 
 const App = styled.div`
   display: flex;
@@ -59,11 +56,6 @@ const Stretch = styled.div`
   margin-top: 1rem;
 `;
 
-window.client = createClient({
-  space: 'j1vuikz5psjc',
-  accessToken: '8c1c2d8a076eaef423845f207d8da00b5e0544bf1777e0f3b7335a768226238b'
-});
-
 const activeLinkStyle = {
   color: 'black',
   textDecoration: 'none',
@@ -97,17 +89,19 @@ ReactDOM.render(
       </Header>
 
       <Stretch>
-        <Route exact path="/communities" component={Communities}/>
-        <Route exact path="/events" component={Events}/>
-        <Route exact path="/people" component={People}/>
-        <Route exact path="/chat" component={Chat}/>
-        <Route path="/companies/:framework" component={Companies}/>
+        <Route exact path="/communities" component={ asyncComponent(() => import('./components/communities/Communities')) }/>
+        <Route exact path="/events" component={ asyncComponent(() => import('./components/events/Events')) }/>
+        <Route exact path="/people" component={ asyncComponent(() => import('./components/people/People')) }/>
+        <Route exact path="/chat" component={ asyncComponent(() => import('./components/chat/Chat')) }/>
+        <Route path="/companies/:framework" component={ asyncComponent(() => import('./components/companies/Companies')) }/>
       </Stretch>
 
       <Footer>
         Created by <TrackableLink href="https://twitter.com/ilyagelman" target="_blank">@ilyagelman</TrackableLink>
-        {' and '}
+        {', '}
         <TrackableLink href="https://twitter.com/kirjs" target="_blank">@kirjs</TrackableLink>
+        {' and '}
+        <TrackableLink href="https://github.com/maniator" target="_blank">@maniator</TrackableLink>
       </Footer>
 
       <Route path="/companies" render={() => (

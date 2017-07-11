@@ -41,7 +41,7 @@ const PeopleGrid = ({ people }) => {
     const photoUrl = photo ? photo.fields.file.url : 'https://placebear.com/400/400';
 
     return (
-      <Person key={person.sys.id}>
+      <Person key={person.id}>
         <img src={photoUrl} alt={fullName} width="200rem" height="200rem"/>
 
         <PersonName>

@@ -5,6 +5,9 @@
   "dependencies": {
     "contentful": "^4.1.2",
     "date-fns": "^1.28.3",
+    "express": "^4.15.3",
+    "express-history-api-fallback": "^2.2.1",
+    "express-http-proxy": "^1.0.4",
     "lodash": "^4.17.4",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
@@ -12,12 +15,30 @@
     "styled-components": "^1.4.5"
   },
   "devDependencies": {
-    "react-scripts": "0.9.5"
+    "babel-core": "^6.23.1",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.3.1",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-es2015-loose": "^8.0.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "babel-register": "^6.23.0",
+    "nodemon": "^1.11.0",
+    "react-scripts": "^1.0.10"
+  },
+  "proxy": {
+    "/api": {
+      "target": "http://localhost:4000"
+    }
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "npm run dev & npm run devServer",
+    "dev": "react-scripts start",
+    "build": "REACT_APP_API_URL=//nyc-js-org.herokuapp.com react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "node -r babel-register -- ./server/server.js",
+    "devServer": "./node_modules/.bin/nodemon --exec 'npm run server'",
+    "production": "npm run build & npm run server"
   }
 }
