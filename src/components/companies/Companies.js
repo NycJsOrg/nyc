@@ -12,10 +12,25 @@ const Container = styled.div`
 
 class Companies extends React.Component {
 
-  state = {
+constructor(props) {
+  super(props)
+  this.state = {
     loading: true,
     companies: []
   };
+  
+  this.fetchCompanies = (props) => {
+    getCompaniesByFramework(props.match.params.framework)
+      .then(items => this.setState({
+        companies: items,
+        loading: false
+      }));
+  
+    global.ga('set', 'page', '/companies/' + props.match.params.framework);
+    global.ga('send', 'pageview');
+  };
+}
+
 
   componentDidMount() {
     this.fetchCompanies(this.props);
@@ -25,16 +40,6 @@ class Companies extends React.Component {
     this.fetchCompanies(newProps);
   }
 
-  fetchCompanies = (props) => {
-    getCompaniesByFramework(props.match.params.framework)
-      .then(items => this.setState({
-        companies: items,
-        loading: false
-      }));
-
-    global.ga('set', 'page', '/companies/' + props.match.params.framework);
-    global.ga('send', 'pageview');
-  };
 
   render() {
     const { loading, companies } = this.state;

@@ -5,10 +5,14 @@ import {getCommunities} from '../../services/communities';
 
 class Communities extends React.Component {
 
-  state = {
+constructor(props) {
+  super(props)
+  this.state = {
     loading: true,
     communities: []
   };
+}
+
 
   componentDidMount() {
     getCommunities()

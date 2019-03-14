@@ -11,10 +11,13 @@ const Container = styled.div`
 
 class People extends React.Component {
 
-  state = {
-    loading: true,
-    people: []
-  };
+  constructor(props) {
+    super(props)
+    this.state = {
+      loading: true,
+      people: []
+    };
+  }
 
   componentDidMount() {
     getPeople()

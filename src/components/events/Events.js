@@ -15,14 +15,14 @@ const Container = styled.div`
 
 class Events extends React.Component {
 
-  state = {
-    loading: true,
-    events: []
-  };
-
-  constructor() {
-    super();
-
+  
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+      loading: true,
+      events: []
+    };
     const start = startOfWeek(new Date());
     const end = endOfWeek(addWeeks(start, 7));
 
