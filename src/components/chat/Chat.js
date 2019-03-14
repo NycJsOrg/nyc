@@ -36,8 +36,8 @@ class Chat extends React.Component {
 
         <br/><br/>
 
-        <JoinButton href="https://discord.gg/7ffykRn">
-          Join NYC.JS.ORG on Discord
+        <JoinButton href="https://nycjsorg.now.sh">
+          Join NYC.JS.ORG on Slack
         </JoinButton>
       </div>
     );
